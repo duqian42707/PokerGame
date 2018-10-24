@@ -12,6 +12,8 @@
 		84D93046217FF96400F91DEF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 84D93044217FF96400F91DEF /* Main.storyboard */; };
 		84D93048217FF96700F91DEF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 84D93047217FF96700F91DEF /* Assets.xcassets */; };
 		84D9304B217FF96700F91DEF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 84D93049217FF96700F91DEF /* LaunchScreen.storyboard */; };
+		84D93054217FFDB600F91DEF /* PlayingCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D93053217FFDB600F91DEF /* PlayingCard.swift */; };
+		84D930562180109D00F91DEF /* PlayingCardDeck.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D930552180109D00F91DEF /* PlayingCardDeck.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +24,8 @@
 		84D93047217FF96700F91DEF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		84D9304A217FF96700F91DEF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		84D9304C217FF96700F91DEF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		84D93053217FFDB600F91DEF /* PlayingCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayingCard.swift; sourceTree = "<group>"; };
+		84D930552180109D00F91DEF /* PlayingCardDeck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayingCardDeck.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,14 +58,24 @@
 		84D9303F217FF96400F91DEF /* PokerGame */ = {
 			isa = PBXGroup;
 			children = (
-				84D93040217FF96400F91DEF /* AppDelegate.swift */,
-				84D93042217FF96400F91DEF /* ViewController.swift */,
 				84D93044217FF96400F91DEF /* Main.storyboard */,
+				84D93053217FFDB600F91DEF /* PlayingCard.swift */,
+				84D930552180109D00F91DEF /* PlayingCardDeck.swift */,
+				84D93042217FF96400F91DEF /* ViewController.swift */,
 				84D93047217FF96700F91DEF /* Assets.xcassets */,
-				84D93049217FF96700F91DEF /* LaunchScreen.storyboard */,
+				84D93052217FF9C400F91DEF /* Supporting Files */,
 				84D9304C217FF96700F91DEF /* Info.plist */,
 			);
 			path = PokerGame;
+			sourceTree = "<group>";
+		};
+		84D93052217FF9C400F91DEF /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				84D93040217FF96400F91DEF /* AppDelegate.swift */,
+				84D93049217FF96700F91DEF /* LaunchScreen.storyboard */,
+			);
+			path = "Supporting Files";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -136,6 +150,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				84D93043217FF96400F91DEF /* ViewController.swift in Sources */,
+				84D930562180109D00F91DEF /* PlayingCardDeck.swift in Sources */,
+				84D93054217FFDB600F91DEF /* PlayingCard.swift in Sources */,
 				84D93041217FF96400F91DEF /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -289,7 +305,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.dqv5.ios.PokerGame;
+				PRODUCT_BUNDLE_IDENTIFIER = com.dqv5.ios.test3;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -307,7 +323,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.dqv5.ios.PokerGame;
+				PRODUCT_BUNDLE_IDENTIFIER = com.dqv5.ios.test3;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
