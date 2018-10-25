@@ -13,16 +13,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        var game = PlayingCardDeck()
         
-        
-        var card = game.draw()
-        var num=1
-        while card != nil{
-            print("\(num)...\(String(describing: card))")
-            card = game.draw()
-            num += 1
-        }
     }
 
 
