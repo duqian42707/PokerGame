@@ -15,6 +15,7 @@
 		84D93054217FFDB600F91DEF /* PlayingCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D93053217FFDB600F91DEF /* PlayingCard.swift */; };
 		84D930562180109D00F91DEF /* PlayingCardDeck.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D930552180109D00F91DEF /* PlayingCardDeck.swift */; };
 		84D930602180407700F91DEF /* PlayingCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D9305F2180407700F91DEF /* PlayingCardView.swift */; };
+		E4B0DC143F213A6B102AC170 /* Pods_PokerGame.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD2E9CF7FD786D7A95812091 /* Pods_PokerGame.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,9 @@
 		84D93053217FFDB600F91DEF /* PlayingCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayingCard.swift; sourceTree = "<group>"; };
 		84D930552180109D00F91DEF /* PlayingCardDeck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayingCardDeck.swift; sourceTree = "<group>"; };
 		84D9305F2180407700F91DEF /* PlayingCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayingCardView.swift; sourceTree = "<group>"; };
+		AD2E9CF7FD786D7A95812091 /* Pods_PokerGame.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PokerGame.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		CE9F0B7D47A6E46713519142 /* Pods-PokerGame.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PokerGame.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PokerGame/Pods-PokerGame.debug.xcconfig"; sourceTree = "<group>"; };
+		F1E4F489DD8ABDE16F77F6C0 /* Pods-PokerGame.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PokerGame.release.xcconfig"; path = "Pods/Target Support Files/Pods-PokerGame/Pods-PokerGame.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -35,17 +39,37 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E4B0DC143F213A6B102AC170 /* Pods_PokerGame.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2619E94DE2771E3F2B1E8370 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				CE9F0B7D47A6E46713519142 /* Pods-PokerGame.debug.xcconfig */,
+				F1E4F489DD8ABDE16F77F6C0 /* Pods-PokerGame.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		38D749CEA00ADDD3693F269C /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				AD2E9CF7FD786D7A95812091 /* Pods_PokerGame.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		84D93034217FF96400F91DEF = {
 			isa = PBXGroup;
 			children = (
 				84D9303F217FF96400F91DEF /* PokerGame */,
 				84D9303E217FF96400F91DEF /* Products */,
+				2619E94DE2771E3F2B1E8370 /* Pods */,
+				38D749CEA00ADDD3693F269C /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -88,9 +112,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 84D9304F217FF96700F91DEF /* Build configuration list for PBXNativeTarget "PokerGame" */;
 			buildPhases = (
+				EEE253826888E6649BFA0720 /* [CP] Check Pods Manifest.lock */,
 				84D93039217FF96400F91DEF /* Sources */,
 				84D9303A217FF96400F91DEF /* Frameworks */,
 				84D9303B217FF96400F91DEF /* Resources */,
+				AA2CC4C2F50361EEF9258725 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -146,6 +172,53 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		AA2CC4C2F50361EEF9258725 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-PokerGame/Pods-PokerGame-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-PokerGame/Pods-PokerGame-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		EEE253826888E6649BFA0720 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-PokerGame-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		84D93039217FF96400F91DEF /* Sources */ = {
@@ -300,6 +373,7 @@
 		};
 		84D93050217FF96700F91DEF /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = CE9F0B7D47A6E46713519142 /* Pods-PokerGame.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -318,6 +392,7 @@
 		};
 		84D93051217FF96700F91DEF /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F1E4F489DD8ABDE16F77F6C0 /* Pods-PokerGame.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
