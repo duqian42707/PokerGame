@@ -8,7 +8,7 @@
 
 import Foundation
 struct PlayingCardDeck{
-    var cards = [PlayingCard]()
+    private(set) var cards = [PlayingCard]()
     
     mutating func draw()->PlayingCard?{
         if(cards.isEmpty){

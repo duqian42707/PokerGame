@@ -61,10 +61,10 @@
 			isa = PBXGroup;
 			children = (
 				84D93044217FF96400F91DEF /* Main.storyboard */,
+				84D93042217FF96400F91DEF /* ViewController.swift */,
 				84D9305F2180407700F91DEF /* PlayingCardView.swift */,
 				84D93053217FFDB600F91DEF /* PlayingCard.swift */,
 				84D930552180109D00F91DEF /* PlayingCardDeck.swift */,
-				84D93042217FF96400F91DEF /* ViewController.swift */,
 				84D93047217FF96700F91DEF /* Assets.xcassets */,
 				84D93052217FF9C400F91DEF /* Supporting Files */,
 				84D9304C217FF96700F91DEF /* Info.plist */,

@@ -10,13 +10,17 @@ import UIKit
 
 @IBDesignable
 class PlayingCardView: UIView {
-
+    
     @IBInspectable
-    var rank:Int = 9 {didSet{ setNeedsDisplay();setNeedsDisplay()}}
+    var rank:Int = 9 {didSet{ setNeedsDisplay();setNeedsLayout()}}
     @IBInspectable
-    var suit:String = "♠️" {didSet{ setNeedsDisplay();setNeedsDisplay()}}
+    var suit:String = "♠️" {didSet{ setNeedsDisplay();setNeedsLayout()}}
     @IBInspectable
-    var isFaceUp:Bool = true {didSet{ setNeedsDisplay();setNeedsDisplay()}}
+    var isFaceUp:Bool = true {didSet{ setNeedsDisplay();setNeedsLayout()}}
+    
+    var faceCardScale:CGFloat = SizeRatio.faceCardImageSizeToBoundsSize {
+        didSet{ setNeedsDisplay();setNeedsLayout()}
+    }
     
     private var cornerString:NSAttributedString{
         get{
@@ -29,9 +33,18 @@ class PlayingCardView: UIView {
     
     
     
-    
+    @objc func adjustFaceCardScale(byHandlingGestureRecognizerBy recognizer: UIPinchGestureRecognizer) {
+        print("adjustFaceCardScale")
+        switch recognizer.state {
+        case .changed:
+            faceCardScale *= recognizer.scale
+            recognizer.scale = 1.0
+        default: break
+        }
+    }
     
     override func draw(_ rect: CGRect) {
+        print("draw")
         //画出带圆角的矩形框--牌
         let roundPath = UIBezierPath(roundedRect: bounds, cornerRadius: cornerRadius)
         roundPath.addClip()
@@ -42,7 +55,7 @@ class PlayingCardView: UIView {
         if(isFaceUp){
             if(rank>10){
                 if let facedImage = UIImage(named: rankString + suit, in: Bundle(for: self.classForCoder), compatibleWith: traitCollection) {
-                    facedImage.draw(in:bounds.zoom(by: SizeRatio.faceCardImageSizeToBoundsSize))
+                    facedImage.draw(in:bounds.zoom(by: faceCardScale))
                 }
             }else{
                 drawPips()
@@ -52,11 +65,10 @@ class PlayingCardView: UIView {
                 backImage.draw(in:bounds.zoom(by: SizeRatio.faceCardImageSizeToBoundsSize))
             }
         }
-     
-        
     }
     
     override func layoutSubviews() {
+        print("layoutSubviews")
         super.layoutSubviews()
         //画左上角的点数、花色
         configurCornerLabel(leftTopCornerLabel)
@@ -99,7 +111,7 @@ class PlayingCardView: UIView {
         label.frame.size = CGSize.zero
         label.sizeToFit()
         label.isHidden = !isFaceUp
-        
+        print(label.isHidden)
     }
     
     private func drawPips() {
@@ -141,7 +153,7 @@ class PlayingCardView: UIView {
             }
         }
     }
-
+    
 }
 
 
