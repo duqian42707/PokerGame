@@ -8,11 +8,15 @@
 
 import UIKit
 
+@IBDesignable
 class PlayingCardView: UIView {
 
-    var rank = 5 {didSet{ setNeedsDisplay();setNeedsDisplay()}}
-    var suit = "♥️" {didSet{ setNeedsDisplay();setNeedsDisplay()}}
-    var isFaceUp = true {didSet{ setNeedsDisplay();setNeedsDisplay()}}
+    @IBInspectable
+    var rank:Int = 9 {didSet{ setNeedsDisplay();setNeedsDisplay()}}
+    @IBInspectable
+    var suit:String = "♠️" {didSet{ setNeedsDisplay();setNeedsDisplay()}}
+    @IBInspectable
+    var isFaceUp:Bool = true {didSet{ setNeedsDisplay();setNeedsDisplay()}}
     
     private var cornerString:NSAttributedString{
         get{
@@ -28,17 +32,37 @@ class PlayingCardView: UIView {
     
     
     override func draw(_ rect: CGRect) {
+        //画出带圆角的矩形框--牌
         let roundPath = UIBezierPath(roundedRect: bounds, cornerRadius: cornerRadius)
         roundPath.addClip()
         UIColor.white.setFill()
         roundPath.fill()
+        
+        //画带人脸的扑克牌 ：J  Q  K
+        if(isFaceUp){
+            if(rank>10){
+                if let facedImage = UIImage(named: rankString + suit, in: Bundle(for: self.classForCoder), compatibleWith: traitCollection) {
+                    facedImage.draw(in:bounds.zoom(by: SizeRatio.faceCardImageSizeToBoundsSize))
+                }
+            }else{
+                drawPips()
+            }
+        }else{
+            if let backImage = UIImage(named: "cardback", in: Bundle(for: self.classForCoder), compatibleWith: traitCollection) {
+                backImage.draw(in:bounds.zoom(by: SizeRatio.faceCardImageSizeToBoundsSize))
+            }
+        }
+     
+        
     }
     
     override func layoutSubviews() {
         super.layoutSubviews()
+        //画左上角的点数、花色
         configurCornerLabel(leftTopCornerLabel)
         leftTopCornerLabel.frame.origin = bounds.origin.offsetBy(dx:cornerOffset,dy:cornerOffset)
         
+        //画右下角的点数、花色
         configurCornerLabel(rightBottomCornerLabel)
         rightBottomCornerLabel.transform = CGAffineTransform.identity
             //.translatedBy(x: rightBottomCornerLabel.frame.size.width, y: rightBottomCornerLabel.frame.size.height)
@@ -48,6 +72,7 @@ class PlayingCardView: UIView {
             .offsetBy(dx: -rightBottomCornerLabel.frame.size.width, dy: -rightBottomCornerLabel.frame.size.height)
         
     }
+    //调整字体大小设置时，重新画
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         setNeedsDisplay()
         setNeedsLayout()
@@ -75,6 +100,46 @@ class PlayingCardView: UIView {
         label.sizeToFit()
         label.isHidden = !isFaceUp
         
+    }
+    
+    private func drawPips() {
+        let pipsPerRowForRank = [[0], [1], [1,1], [1,1,1], [2,2], [2,1,2], [2,2,2], [2,1,2,2], [2,2,2,2], [2,2,1,2,2], [2,2,2,2,2]]
+        
+        func createPipString(thatFits pipRect: CGRect) -> NSAttributedString {
+            let maxVerticalPipCount = CGFloat(pipsPerRowForRank.reduce(0) { max($1.count, $0)})
+            let maxHorizontalPipCount = CGFloat(pipsPerRowForRank.reduce(0) { max($1.max() ?? 0, $0)})
+            let verticalPipRowSpacing = pipRect.size.height / maxVerticalPipCount
+            let attemptedPipString = centerAttrString(suit, fontSize: verticalPipRowSpacing)
+            let probablyOkayPipStringFontSize = verticalPipRowSpacing / (attemptedPipString.size().height / verticalPipRowSpacing)
+            let probablyOkayPipString = centerAttrString(suit, fontSize: probablyOkayPipStringFontSize)
+            if probablyOkayPipString.size().width > pipRect.size.width / maxHorizontalPipCount {
+                return centerAttrString(suit, fontSize: probablyOkayPipStringFontSize /
+                    (probablyOkayPipString.size().width / (pipRect.size.width / maxHorizontalPipCount)))
+            } else {
+                return probablyOkayPipString
+            }
+        }
+        
+        if pipsPerRowForRank.indices.contains(rank) {
+            let pipsPerRow = pipsPerRowForRank[rank]
+            var pipRect = bounds.insetBy(dx: cornerOffset, dy: cornerOffset).insetBy(dx: cornerString.size().width, dy: cornerString.size().height / 2)
+            let pipString = createPipString(thatFits: pipRect)
+            let pipRowSpacing = pipRect.size.height / CGFloat(pipsPerRow.count)
+            pipRect.size.height = pipString.size().height
+            pipRect.origin.y += (pipRowSpacing - pipRect.size.height) / 2
+            for pipCount in pipsPerRow {
+                switch pipCount {
+                case 1:
+                    pipString.draw(in: pipRect)
+                case 2:
+                    pipString.draw(in: pipRect.leftHalf)
+                    pipString.draw(in: pipRect.rightHalf)
+                default:
+                    break
+                }
+                pipRect.origin.y += pipRowSpacing
+            }
+        }
     }
 
 }
@@ -116,5 +181,24 @@ extension PlayingCardView {
 extension CGPoint {
     func offsetBy(dx: CGFloat, dy: CGFloat) -> CGPoint {
         return CGPoint(x: x + dx, y: y + dy)
+    }
+}
+
+extension CGRect{
+    func zoom(by zoomFactor: CGFloat) -> CGRect {
+        let zoomedWidth = size.width * zoomFactor
+        let zoomedHeight = size.height * zoomFactor
+        let originX = origin.x + (size.width - zoomedWidth) / 2
+        let originY = origin.y + (size.height - zoomedHeight) / 2
+        return CGRect(origin: CGPoint(x: originX,y: originY) , size: CGSize(width: zoomedWidth, height: zoomedHeight))
+    }
+    var leftHalf: CGRect {
+        let width = size.width / 2
+        return CGRect(origin: origin, size: CGSize(width: width, height: size.height))
+    }
+    
+    var rightHalf: CGRect {
+        let width = size.width / 2
+        return CGRect(origin: CGPoint(x: origin.x + width, y: origin.y), size: CGSize(width: width, height: size.height))
     }
 }
